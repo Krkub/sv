@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model city {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(50)
+  post_code String   @db.VarChar(6)
+  hotels    hotels[]
+}
+
+model hotels {
+  id       Int     @id @default(autoincrement())
+  name     String  @db.VarChar(50)
+  city_id  Int
+  stars    Int
+  has_pool Boolean
+  has_gym  Boolean
+  city     city    @relation(fields: [city_id], references: [id], onUpdate: Restrict, map: "hotels_ibfk_1")
+  rooms    rooms[]
+
+  @@index([city_id], map: "city_id")
+}
+
+model reservations {
+  id         Int       @id @default(autoincrement())
+  user_id    Int
+  room_id    Int
+  start_date DateTime  @db.Date
+  end_date   DateTime  @db.Date
+  total      Decimal?  @db.Decimal(10, 4)
+  created_at DateTime  @default(now()) @db.Timestamp(0)
+  updated_at DateTime? @db.DateTime(0)
+  users      users     @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "reservations_ibfk_1")
+  rooms      rooms     @relation(fields: [room_id], references: [id], onUpdate: Restrict, map: "reservations_ibfk_2")
+  reviews    reviews[]
+
+  @@index([room_id, user_id], map: "room_id")
+  @@index([user_id], map: "user_id")
+}
+
+model reviews {
+  id             Int          @id @default(autoincrement())
+  reservation_id Int
+  rating         Int
+  comment        String       @db.Text
+  reservations   reservations @relation(fields: [reservation_id], references: [id], onUpdate: Restrict, map: "reviews_ibfk_1")
+
+  @@index([reservation_id], map: "reservation_id")
+}
+
+model room_type {
+  id                   Int       @id @default(autoincrement())
+  name                 String    @db.VarChar(255)
+  total_ocupancy       Int
+  total_bedrooms       Int
+  total_bathrooms      Int
+  has_tv               Boolean
+  has_kitchen          Boolean
+  has_air_conditioning Boolean
+  has_heating          Boolean
+  has_internet         Boolean
+  created_at           DateTime  @default(now()) @db.Timestamp(0)
+  updated_at           DateTime? @db.Timestamp(0)
+  rooms                rooms[]
+}
+
+model rooms {
+  id           Int            @id @default(autoincrement())
+  room_type_id Int
+  price        Decimal        @db.Decimal(10, 4)
+  room_number  String         @db.VarChar(16)
+  hotel_id     Int
+  reservations reservations[]
+  hotels       hotels         @relation(fields: [hotel_id], references: [id], onUpdate: Restrict, map: "rooms_ibfk_2")
+  room_type    room_type      @relation(fields: [room_type_id], references: [id], onUpdate: Restrict, map: "rooms_ibfk_3")
+
+  @@index([hotel_id], map: "hotel_id")
+  @@index([room_type_id], map: "room_type_id")
+}
+
+model users {
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
+  email        String         @db.VarChar(255)
+  password     String         @db.VarChar(255)
+  created_at   DateTime       @default(now()) @db.Timestamp(0)
+  updated_at   DateTime?      @db.Timestamp(0)
+  phone_number Int?
+  description  String?        @db.Text
+  reservations reservations[]
+
+  @@index([name], map: "C")
+}
