@@ -91,7 +91,7 @@ model users {
   password     String         @db.VarChar(255)
   created_at   DateTime       @default(now()) @db.Timestamp(0)
   updated_at   DateTime?      @db.Timestamp(0)
-  phone_number Int?
+  phone_number String?        @db.VarChar(11)
   description  String?        @db.Text
   reservations reservations[]
 

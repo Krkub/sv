@@ -1,12 +1,17 @@
 import type { LayoutServerLoad, } from "./$types";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../prisma";
 
+import * as jwt from "jsonwebtoken";
+import { JWT_KEY } from "$env/static/private";
 export const load = (async (data) => {
-    const user_id = data.cookies.get("user_id")
-    if(user_id){
-    const prisma = new PrismaClient
-    const userd = await prisma.users.findFirst({ where: { id: Number(user_id) } })
-      return {userd,suc:true}
+  const token = data.cookies.get("user_id");
+  if (token) {
+    try {
+      const user_id = jwt.verify(token, JWT_KEY, {})
+      const userd = await prisma.users.findFirst({ where: { id: Number(user_id) } })
+      return { suc: true, userd: userd }
     }
-    return {suc:false}
+    catch { return { suc: false } }
+  }
+  return { suc: false }
 }) satisfies LayoutServerLoad

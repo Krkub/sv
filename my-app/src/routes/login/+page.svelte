@@ -1,6 +1,5 @@
 <script lang="ts">
     import type { ActionData } from "./$types";
-
     export let form:ActionData;
 </script>
 
@@ -9,9 +8,10 @@
     <input type="password" name="password" placeholder="Password">
     <input type="submit" value="Register">
 </form>
-{#if form?.succes==true}
+
+{#if form?.success==true}
     Succesfully logged in <a href="/">Go home</a>
-    {:else if form?.succes==false}
+    {:else if form?.success==false}
     Login failed
 {/if}
 <style>
@@ -21,7 +21,7 @@
         width: fit-content;
         padding: 10px;
     }
-    input,textarea{
+    input{
         padding: 10px;
         margin: 15px;
     }
