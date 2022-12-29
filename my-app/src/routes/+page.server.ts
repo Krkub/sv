@@ -49,12 +49,20 @@ export const load = (async (data) => {
 export const actions: Actions = {
     default: async (event) => {
 
-        // const user_id = event.cookies.get("user_id")
-        // await prisma.reservations.delete({
-        //     where:{
-        //         user_id:Number(user_id)
-        //     }
-        // })
-        // return {suc:true}
+        const user_id = event.cookies.get("user_id")
+        if (user_id) {
+            try {
+                const user= jwt.verify(user_id,JWT_KEY)
+                await prisma.reservations.deleteMany({
+                    where: {
+                        user_id: Number(user)
+                    }
+                })
+                return { suc: true }
+            }
+            catch {
+                return { suc: false }
+            }
+        }
     }
 }

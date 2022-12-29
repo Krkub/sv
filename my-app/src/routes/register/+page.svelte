@@ -8,7 +8,7 @@
     <input type="text" name="user_name" placeholder="Username">
     <input type="text" name="email" placeholder="Email">
     <input type="password" name="password" placeholder="Password">
-    <input type="number" name="phone_number" placeholder="Phone number">
+    <input type="tel" name="phone_number" placeholder="Phone number">
     <textarea name="description" placeholder="Description"></textarea>
     <input type="submit" value="Register">
 </form>

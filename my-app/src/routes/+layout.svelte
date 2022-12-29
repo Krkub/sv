@@ -5,17 +5,18 @@
 </script>
 
 <div>
-
 	{#if data?.suc}
-		<span
-			><form action="/login?/logout" method="post"><input type="submit" value="Logout" /></form>
-			{data.userd?.name}</span
-		>
+		<a href="/edit">edit your reservation</a>
+		<span>
+			<form action="/login?/logout" method="post"><input type="submit" value="Logout" /></form>
+			{data.userd?.name}
+		</span>
+		<a href="/make">make a reservation</a>
 	{:else}
-        <nav>
-		<a href="/login">login</a>
-		<a href="/register">register</a>
-        </nav>
+		<nav>
+			<a href="/login">login</a>
+			<a href="/register">register</a>
+		</nav>
 	{/if}
 </div>
 
@@ -29,6 +30,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		background-color: rgba(0, 0, 0, 0);
 	}
 	span {
 		float: right;
