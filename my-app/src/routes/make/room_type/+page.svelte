@@ -14,6 +14,7 @@
                <label for={room_type.id.toString()}>{room_type.name}</label> 
             </div>
             {/each}
+            <input type="submit">
         </form>
 	{/if}
     {#if form?.suc}
