@@ -29,18 +29,5 @@
 {/if}
 
 <style>
-    .flex{
-        display: flex;
-        flex-direction: column;
-    }
-    div{
-        clear: none;
-        width: fit-content;
-        z-index: 10;
-        position: relative;
-    }
-    button{
-        width: 10%;
-    }
-
+    
 </style>

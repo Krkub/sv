@@ -1,44 +1,46 @@
 <script lang="ts">
 	import type { LayoutServerData } from './$types';
-
+	import { page } from "$app/stores";
 	export let data: LayoutServerData;
 </script>
 
-<div>
+<main class="head">
 	{#if data?.suc}
-		<a href="/edit">edit your reservation</a>
-		<span>
+		<nav>
+			<a href="/edit" class={$page.url.pathname.substring(0,5) ==="/edit"?"selected":undefined}>edit your reservation</a>
+			<a href="/make" class={$page.url.pathname.substring(0,5) ==="/make"?"selected":undefined}>make a reservation</a>
+		</nav>
+		<div class="logut">
 			<form action="/login?/logout" method="post"><input type="submit" value="Logout" /></form>
 			{data.userd?.name}
-		</span>
-		<a href="/make">make a reservation</a>
+		</div>
 	{:else}
 		<nav>
-			<a href="/login">login</a>
-			<a href="/register">register</a>
+			<a href="/login" class={$page.url.pathname.substring(0,6) ==="/login"?"selected":undefined}>login</a>
+			<a href="/register" class={$page.url.pathname.substring(0,9) ==="/register"?"selected":undefined}>register</a>
 		</nav>
 	{/if}
+</main>
+<div>
+	<slot />
 </div>
 
-<slot />
-
 <style>
-	div {
-		position: fixed;
-		width: 100%;
-		box-sizing: border-box;
+	.selected{
+		text-decoration: underline red;
+	}
+	main {
 		display: flex;
-		align-items: center;
+		width: 100%;
 		justify-content: center;
-		background-color: rgba(0, 0, 0, 0);
+		align-items: center;
 	}
-	span {
-		float: right;
-		padding: 10px;
+	.logut {
+		justify-self: flex-end;
 	}
-	nav {
-		width: 30%;
+	nav{
 		display: flex;
 		justify-content: space-around;
+		width: 40%;
 	}
 </style>

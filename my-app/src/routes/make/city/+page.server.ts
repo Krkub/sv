@@ -1,7 +1,7 @@
 import type { Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { prisma } from "../../../prisma";
-import { goto } from "$app/navigation";
+
 
 export const load = (async (event) => {
     const cities = await prisma.city.findMany({
@@ -20,7 +20,8 @@ export const actions: Actions = {
         const city=form.get("city")?.toString()
         if(city){
         event.cookies.set("city_id",city,{path:"/"})
-        goto("/make/hotels")
+        return {suc:true}
         }
+        return {suc:false}
     }
 }
