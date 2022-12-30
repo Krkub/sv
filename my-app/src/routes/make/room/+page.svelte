@@ -10,7 +10,10 @@
     {#each data.rooms as room}
         <div>
             <input type="radio" value={room.id} name="room" id={room.id.toString()}>
-            <label for={room.id.toString()}>{room.room_number}</label>
+            <label for={room.id.toString()}>
+                Number: {room.room_number}
+                Price: {room.price}
+            </label>
         </div>
         {/each}
         <input type="submit">

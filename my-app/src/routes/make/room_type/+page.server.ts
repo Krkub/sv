@@ -6,7 +6,7 @@ export const load = (async (event) => {
         const room_types = await prisma.room_type.findMany({
             where: {
                 rooms: {
-                    every: { hotel_id: { equals: Number(hotel_id) } }
+                    some: { hotel_id: { equals: Number(hotel_id) } }
                 }
             }
         })

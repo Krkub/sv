@@ -9,8 +9,21 @@
     {#if data.hotels}
     <form action="/make/hotel" method="post">
     {#each data?.hotels as hotel}
-        <input type="radio" name="hotel" id={hotel.id.toString()} value={hotel.id}>
-        <label for={hotel.id.toString()}>{hotel.name}</label>
+    <div>
+            
+            <input type="radio" name="hotel" id={hotel.id.toString()} value={hotel.id}>
+        <label for={hotel.id.toString()}>
+            Name: {hotel.name}
+        {#if hotel.has_gym}
+            Has gym
+        {/if}
+        {#if hotel.has_pool}
+            Has pool
+        {/if}
+        Stars: {hotel.stars}
+        </label>
+        
+    </div>
     {/each}
         <input type="submit" value="submit">
     </form>

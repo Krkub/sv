@@ -6,7 +6,7 @@ import { prisma } from "../../../prisma";
 export const load = (async (event) => {
     const cities = await prisma.city.findMany({
         where: {
-            hotels: { every: {} }
+            hotels: { some: {rooms:{some:{}}} }
 
         }
     })

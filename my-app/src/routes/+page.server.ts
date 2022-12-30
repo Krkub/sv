@@ -9,7 +9,7 @@ export const load = (async (data) => {
     if (token) {
         try {
             const user_id = jwt.verify(token, JWT_KEY)
-            const reservations = await prisma.reservations.findFirst({
+            const reservations = await prisma.reservations.findMany({
                 where:
                     { user_id: Number(user_id) },
                 include: {
@@ -28,14 +28,7 @@ export const load = (async (data) => {
             })
             if (reservations) {
                 return {
-                    total: reservations?.total?.toString(),
-                    city: reservations?.rooms.hotels.city.name,
-                    hotel_name: reservations?.rooms.hotels.name,
-                    stars: reservations?.rooms.hotels.stars,
-                    room_type: reservations?.rooms.room_type.name,
-                    room_number: reservations?.rooms.room_number,
-                    start_date: reservations?.start_date,
-                    end_date: reservations?.end_date,
+                    reservations,
                     suc: true
                 }
             }
@@ -47,7 +40,7 @@ export const load = (async (data) => {
 
 
 export const actions: Actions = {
-    default: async (event) => {
+    cancel: async (event) => {
 
         const user_id = event.cookies.get("user_id")
         if (user_id) {
@@ -64,5 +57,10 @@ export const actions: Actions = {
                 return { suc: false }
             }
         }
+    },
+    logout: async (event) => {
+        event.cookies.delete("user_id", { path: "/" })
+        return { success: true }
+    
     }
 }

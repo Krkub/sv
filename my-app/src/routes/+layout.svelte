@@ -5,13 +5,14 @@
 </script>
 
 <main class="head">
+	<a href="/" class={$page.url.pathname ==="/"?"selected":undefined}>home</a>
 	{#if data?.suc}
 		<nav>
 			<a href="/edit" class={$page.url.pathname.substring(0,5) ==="/edit"?"selected":undefined}>edit your reservation</a>
 			<a href="/make" class={$page.url.pathname.substring(0,5) ==="/make"?"selected":undefined}>make a reservation</a>
 		</nav>
 		<div class="logut">
-			<form action="/login?/logout" method="post"><input type="submit" value="Logout" /></form>
+			<form action="/?/logout" method="post"><input type="submit" value="Logout" /></form>
 			{data.userd?.name}
 		</div>
 	{:else}

@@ -3,10 +3,10 @@
     export let form:ActionData;
 </script>
 
-<form  method="post" action="?/login">
+<form  method="post" action="/login">
     <input type="text" name="email" placeholder="Email">
     <input type="password" name="password" placeholder="Password">
-    <input type="submit" value="Register">
+    <input type="submit" value="Login">
 </form>
 
 {#if form?.success==true}
