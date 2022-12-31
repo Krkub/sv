@@ -1,6 +1,7 @@
 <main>
 	<a href="/make/city">Begin reservation</a>
 </main>
+
 <style>
 	main {
 		display: flex;

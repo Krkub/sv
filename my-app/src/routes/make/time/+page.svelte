@@ -9,7 +9,7 @@
 <main>
 	<form action="/make/time" method="post">
 		<label for="start_date">Start date:</label>
-		<input bind:value={start_date} type="date" id="start_date" name="start_date"  max={end_date}/>
+		<input bind:value={start_date} type="date" id="start_date" name="start_date" max={end_date} />
 		<label for="end_date">End date:</label>
 		<input type="date" id="end_date" name="end_date" bind:value={end_date} min={start_date} />
 		<input type="submit" />

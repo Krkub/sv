@@ -16,10 +16,10 @@
 			<span>Room number:{reservation.rooms.room_number}</span>
 			<span>Start date:{reservation.start_date?.toISOString().substring(0, 10)} </span>
 			<span>End date:{reservation.end_date?.toISOString().substring(0, 10)}</span>
-			<button on:click={(e) => (cancel_confim = reservation.id)}>Cancel</button>
-			{#if cancel_confim===reservation.id}
+			<button on:click={() => (cancel_confim = reservation.id)}>Cancel</button>
+			{#if cancel_confim === reservation.id}
 				<form action="/?/cancel" method="post">
-					<input type="hidden" value={reservation.id}>
+					<input type="hidden" value={reservation.id} />
 					<input type="submit" value="Are you sure you want to cancel" />
 				</form>
 			{/if}

@@ -1,15 +1,23 @@
 <script lang="ts">
 	import type { LayoutServerData } from './$types';
-	import { page } from "$app/stores";
+	import { page } from '$app/stores';
 	export let data: LayoutServerData;
 </script>
 
 <main class="head">
-	<a href="/" class={$page.url.pathname ==="/"?"selected":undefined}>home</a>
+	<a href="/" class={$page.url.pathname === '/' ? 'selected' : undefined}>home</a>
 	{#if data?.suc}
 		<nav>
-			<a href="/edit" class={$page.url.pathname.substring(0,5) ==="/edit"?"selected":undefined}>edit your reservation</a>
-			<a href="/make" class={$page.url.pathname.substring(0,5) ==="/make"?"selected":undefined}>make a reservation</a>
+			<a
+				href="/edit"
+				class={$page.url.pathname.substring(0, 5) === '/edit' ? 'selected' : undefined}
+				>edit your reservation</a
+			>
+			<a
+				href="/make"
+				class={$page.url.pathname.substring(0, 5) === '/make' ? 'selected' : undefined}
+				>make a reservation</a
+			>
 		</nav>
 		<div class="logut">
 			<form action="/?/logout" method="post"><input type="submit" value="Logout" /></form>
@@ -17,8 +25,15 @@
 		</div>
 	{:else}
 		<nav>
-			<a href="/login" class={$page.url.pathname.substring(0,6) ==="/login"?"selected":undefined}>login</a>
-			<a href="/register" class={$page.url.pathname.substring(0,9) ==="/register"?"selected":undefined}>register</a>
+			<a
+				href="/login"
+				class={$page.url.pathname.substring(0, 6) === '/login' ? 'selected' : undefined}>login</a
+			>
+			<a
+				href="/register"
+				class={$page.url.pathname.substring(0, 9) === '/register' ? 'selected' : undefined}
+				>register</a
+			>
 		</nav>
 	{/if}
 </main>
@@ -27,7 +42,7 @@
 </div>
 
 <style>
-	.selected{
+	.selected {
 		text-decoration: underline red;
 	}
 	main {
@@ -39,7 +54,7 @@
 	.logut {
 		justify-self: flex-end;
 	}
-	nav{
+	nav {
 		display: flex;
 		justify-content: space-around;
 		width: 40%;
