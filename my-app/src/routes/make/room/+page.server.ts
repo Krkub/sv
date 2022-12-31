@@ -27,7 +27,7 @@ export const load = (async (event) => {
             return match
         })
 
-        return { rooms: rooms }
+        return { rooms: rooms}
 
     }
 

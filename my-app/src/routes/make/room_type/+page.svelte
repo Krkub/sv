@@ -10,7 +10,7 @@
 		<form action="/make/room_type" method="post">
 			{#each data.room_types as room_type}
 				<div>
-					<input type="radio" value={room_type.id} name="room_type" id={room_type.id.toString()} />
+					<input type="radio" value={room_type.id} name="room_type" id={room_type.id.toString()} checked={data.def===room_type.id}/>
 					<label for={room_type.id.toString()}>
 						Name: {room_type.name}
 						Bathrooms: {room_type.total_bathrooms}

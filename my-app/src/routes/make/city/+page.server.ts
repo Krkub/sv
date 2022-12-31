@@ -10,7 +10,7 @@ export const load = (async (event) => {
 
         }
     })
-    return { cities }
+    return { cities,def:Number(event.cookies.get("city_id")) }
 
 }) satisfies PageServerLoad
 

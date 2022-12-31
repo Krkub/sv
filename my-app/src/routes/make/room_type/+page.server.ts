@@ -10,7 +10,7 @@ export const load = (async (event) => {
                 }
             }
         })
-        return { room_types }
+        return { room_types,def:Number(event.cookies.get("room_type_id")) }
     }
 
 }) satisfies PageServerLoad;

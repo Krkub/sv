@@ -11,7 +11,7 @@
     {#each data?.hotels as hotel}
     <div>
             
-            <input type="radio" name="hotel" id={hotel.id.toString()} value={hotel.id}>
+            <input type="radio" name="hotel" id={hotel.id.toString()} value={hotel.id} checked={data?.def===hotel.id}>
         <label for={hotel.id.toString()}>
             Name: {hotel.name}
         {#if hotel.has_gym}

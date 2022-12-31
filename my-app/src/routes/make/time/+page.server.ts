@@ -1,4 +1,9 @@
-import type { Actions} from './$types';
+import type { Actions, PageServerLoad} from './$types';
+
+export const load=( async (event)=>{
+    return {start_date:event.cookies.get("start_date"),end_date:event.cookies.get("end_date")}
+
+}) satisfies PageServerLoad
 
 export const actions:Actions={
     default:async(event)=>{

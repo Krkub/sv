@@ -8,7 +8,7 @@ export const load=(async (event)=>{
         const hotels = await prisma.hotels.findMany({
             where:{city_id:{equals: Number(city)}}
         })
-        return {hotels,suc:true}
+        return {hotels,suc:true,def:Number(event.cookies.get("hotel_id"))}
     }
     return{suc:false}
 }) satisfies PageServerLoad
