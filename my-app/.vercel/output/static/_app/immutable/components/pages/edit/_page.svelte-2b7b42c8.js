@@ -1,3 +1,0 @@
-import{S as i,i as l,s as d,k as c,q as m,l as u,m as f,r as h,h as o,b as p,E as y,B as r}from"../../../chunks/index-267f67aa.js";function _(s){let e,t;return{c(){e=c("main"),t=m(`in order details of your reservation you nedd to either cancelyour existing reservation and make a
-	new one or call us`)},l(a){e=u(a,"MAIN",{});var n=f(e);t=h(n,`in order details of your reservation you nedd to either cancelyour existing reservation and make a
-	new one or call us`),n.forEach(o)},m(a,n){p(a,e,n),y(e,t)},p:r,i:r,o:r,d(a){a&&o(e)}}}class v extends i{constructor(e){super(),l(this,e,null,_,d,{})}}export{v as default};
