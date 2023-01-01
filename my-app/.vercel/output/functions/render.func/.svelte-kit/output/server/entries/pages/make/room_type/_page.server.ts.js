@@ -1,0 +1,28 @@
+import { p as prisma } from "../../../../chunks/prisma.js";
+const load = async (event) => {
+  const hotel_id = event.cookies.get("hotel_id")?.toString();
+  if (hotel_id) {
+    const room_types = await prisma.room_type.findMany({
+      where: {
+        rooms: {
+          some: { hotel_id: { equals: Number(hotel_id) } }
+        }
+      }
+    });
+    return { room_types, def: Number(event.cookies.get("room_type_id")) };
+  }
+};
+const actions = {
+  default: async (event) => {
+    const data = await event.request.formData();
+    const room_type_id = data.get("room_type")?.toString();
+    if (room_type_id) {
+      event.cookies.set("room_type_id", room_type_id, { path: "/" });
+      return { suc: true };
+    }
+  }
+};
+export {
+  actions,
+  load
+};
