@@ -1,6 +1,6 @@
 import type { Actions, PageServerLoad } from './$types';
 import { prisma } from '../../../prisma';
-import * as jwt from 'jsonwebtoken';
+import jsonwebtoken from 'jsonwebtoken';
 import { JWT_KEY } from '$env/static/private';
 export const load = (async (event) => {
 	const hotel_id = Number(event.cookies.get('hotel_id'));
@@ -44,7 +44,7 @@ export const actions: Actions = {
 			try {
 				const start_date_parsed = new Date(start_date);
 				const end_date_parsed = new Date(end_date);
-				const user_id_parsed = jwt.verify(user_id, JWT_KEY);
+				const user_id_parsed = jsonwebtoken.verify(user_id, JWT_KEY);
 				await prisma.reservations.create({
 					data: {
 						end_date: end_date_parsed,

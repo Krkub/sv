@@ -1,14 +1,14 @@
 import type { PageServerLoad } from './$types';
 import { prisma } from '../prisma';
 import type { Actions } from '@sveltejs/kit';
-import * as jwt from 'jsonwebtoken';
+import jsonwebtoken from 'jsonwebtoken';
 import { JWT_KEY } from '$env/static/private';
 
 export const load = (async (data) => {
 	const token = data.cookies.get('user_id');
 	if (token) {
 		try {
-			const user_id = jwt.verify(token, JWT_KEY);
+			const user_id = jsonwebtoken.verify(token, JWT_KEY);
 			const reservations = await prisma.reservations.findMany({
 				where: { user_id: Number(user_id) },
 				include: {
@@ -42,7 +42,7 @@ export const actions: Actions = {
 		const user_id = event.cookies.get('user_id');
 		if (user_id) {
 			try {
-				const user = jwt.verify(user_id, JWT_KEY);
+				const user = jsonwebtoken.verify(user_id, JWT_KEY);
 				await prisma.reservations.deleteMany({
 					where: {
 						user_id: Number(user)
